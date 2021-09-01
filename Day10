@@ -1,0 +1,27 @@
+const clockTitle = document.querySelector(".js-clock");
+
+function dDay() {
+  
+  //d-day 날짜 지정
+  const setDate = new Date("2021-12-25T00:00:00+0900");
+  
+  //현재 날짜를 new 연산자를 사용해 Date 객체를 생성
+  const now = new Date();
+  
+  //d-day 날짜에서 현재 날짜의 차이를 getTime 메서드를 사용해 밀리초의 값으로 가져오기
+  const distance = setDate.getTime() - now.getTime();
+  
+  //Math.floor 함수를 이용해 근접한 정수값을 가져오기
+  //밀리초 값이기 때문에 1000을 곱한다.
+  //1000*60 -> 60초(1분)*60 -> 60분(1시간)*24 -> 24시간(하루)
+  //나머지 연산자(%)를 이용해서 시/분/초 구하기
+  const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+  const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+  const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+  const seconds = Math.floor((distance & (1000 * 60)) / 1000);
+  
+  clockTitle.innerText = `${days}d ${hours}h ${minutes}m ${seconds}s`;
+}
+
+dDay();
+setInterval(dDay, 1000);
